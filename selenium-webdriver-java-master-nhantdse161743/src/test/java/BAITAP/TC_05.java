@@ -43,7 +43,7 @@ public class TC_05 {
         int scc=0;
         String firstName = "nhan";
         String lastName = "tran";
-        String email_address = "nhantran11@gmail.com";
+        String email_address = "nhantran12@gmail.com";
         String password = "nhan1234";
         String confirmPassword = password;
         WebDriver driver = driverFactory.getChromeDriver();

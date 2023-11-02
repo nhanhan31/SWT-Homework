@@ -26,7 +26,6 @@ import org.testng.annotations.Test;
 public class TC_02 {
     @Test
     public static void testTC02(){
-        StringBuffer verificationErrors = new StringBuffer();
         WebDriver driver = driverFactory.getChromeDriver();
         try {
             //Step 1. Go to http://live.techpanda.org/
@@ -44,11 +43,7 @@ public class TC_02 {
             String demoSite2 = driver.findElement(By.xpath("(//span[@class='price'])[1]")).getText();
             System.out.println(demoSite2);
             //6. Compare Product value in list and details page should be equal ($100).
-            try{
-                AssertJUnit.assertEquals(demoSite1,demoSite2);
-            } catch (Exception e) {
-                verificationErrors.append(e.toString());
-            }
+            AssertJUnit.assertEquals(demoSite1,demoSite2);
         } catch (Exception e){
             e.printStackTrace();
         }
