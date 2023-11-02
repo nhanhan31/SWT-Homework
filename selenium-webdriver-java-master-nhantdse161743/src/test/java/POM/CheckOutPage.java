@@ -15,10 +15,10 @@ public class CheckOutPage {
     By zipInputLocator = By.id("billing:postcode");
     By countryInputLocator = By.id("billing:country_id");
     By telephoneInputLocator = By.id("billing:telephone");
+    By differentAddressButton = By.xpath("(//input[@id='billing:use_for_shipping_no'])[1]");
     By continueBillInfoButton = By.xpath("(//button[@onclick='billing.save()'])[1]");
-    By editInfo = By.xpath("(//a[@href='#'][normalize-space()='Edit'])[2]");
     By continueShipInfoButton = By.xpath("(//button[@onclick='shipping.save()'])[1]");
-    By continueShippingButton = By.cssSelector(".button[onclick='shippingMethod.save()']");
+    By continueShippingButton = By.xpath("(//button[@onclick='shippingMethod.save()'])[1]");
     By moneyOrderButton = By.xpath("(//input[@id='p_method_checkmo'])[1]");
     By continuePaymentButton = By.xpath("(//button[@onclick='payment.save()'])[1]");
     By placeOrderButton = By.xpath("(//button[@title='Place Order'])[1]");
@@ -43,14 +43,15 @@ public class CheckOutPage {
         WebElement countryElement = driver.findElement(countryInputLocator);
         new Select(countryElement).selectByVisibleText(country);
     }
-    public void enterState(String state){
-        WebElement stateElement = driver.findElement(stateInputLocator);
-        new Select (stateElement).selectByVisibleText(state);
-    }
-    public void enterProvince(String province){
-        WebElement provinceElement = driver.findElement(provinceInputLocator);
-        provinceElement.clear();
-        provinceElement.sendKeys(province);
+    public void enterRegion(String region, String country){
+        if(country.equals("United States")){
+            WebElement stateElement = driver.findElement(stateInputLocator);
+            new Select (stateElement).selectByVisibleText(region);
+        } else {
+            WebElement provinceElement = driver.findElement(provinceInputLocator);
+            provinceElement.clear();
+            provinceElement.sendKeys(region);
+        }
     }
     public void enterZip(String zip){
         WebElement zipElement = driver.findElement(zipInputLocator);
@@ -62,11 +63,9 @@ public class CheckOutPage {
         telephoneElement.clear();
         telephoneElement.sendKeys(telephone);
     }
+    public void clickDifferentAddressButton() {driver.findElement(differentAddressButton).click();}
     public void clickContinueBillInfoButton(){
         driver.findElement(continueBillInfoButton).click();
-    }
-    public void clickEditInfo(){
-        driver.findElement(editInfo).click();
     }
     public void clickContinueShipInfoButton(){
         driver.findElement(continueShipInfoButton).click();

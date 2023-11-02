@@ -14,7 +14,8 @@ public class CartPage {
     By provinceInputLocator = By.id("region");
     By zipInputLocator = By.id("postcode");
     By estimateButton = By.xpath("(//span[contains(text(),'Estimate')])[1]");
-    By flatRate = By.xpath("(//label[contains(text(),'Fixed')])[1]");
+    By flatRateValue = By.xpath("(//label[contains(text(),'Fixed')])[1]");
+    By flatRate = By.xpath("(//dt[normalize-space()='Flat Rate'])[1]");
     By flatRateButton = By.xpath("(//input[@id='s_method_flatrate_flatrate'])[1]");
     By updateTotalButton = By.xpath("(//button[@title='Update Total'])[1]");
     By subtotalLocator = By.xpath("(//td)[13]");
@@ -33,15 +34,15 @@ public class CartPage {
         new Select (countryElement).selectByVisibleText(country);
     }
 
-    public void enterState(String state){
-        WebElement stateElement = driver.findElement(stateInputLocator);
-        new Select (stateElement).selectByVisibleText(state);
-    }
-
-    public void enterProvince(String province){
-        WebElement provinceElement = driver.findElement(provinceInputLocator);
-        provinceElement.clear();
-        provinceElement.sendKeys(province);
+    public void enterRegion(String region, String country){
+        if(country.equals("United States")){
+            WebElement stateElement = driver.findElement(stateInputLocator);
+            new Select (stateElement).selectByVisibleText(region);
+        } else {
+            WebElement provinceElement = driver.findElement(provinceInputLocator);
+            provinceElement.clear();
+            provinceElement.sendKeys(region);
+        }
     }
 
     public void enterZip(String zip){
@@ -54,9 +55,11 @@ public class CartPage {
         driver.findElement(estimateButton).click();
     }
     public String verifyGenerated() {
-        String checkStr = driver.findElement(flatRate).getText();
-        AssertJUnit.assertEquals("Fixed - $5.00", checkStr);
-        return checkStr;
+        String checkTextStr = driver.findElement(flatRate).getText();
+        String checkValueStr = driver.findElement(flatRateValue).getText();
+        AssertJUnit.assertEquals("Flat Rate", checkTextStr);
+        AssertJUnit.assertEquals("Fixed - $5.00", checkValueStr);
+        return checkValueStr;
     }
     public void clickFlatRateButton() {
         driver.findElement(flatRateButton).click();
@@ -68,9 +71,9 @@ public class CartPage {
         double subTotal = Double.parseDouble(driver.findElement(subtotalLocator).getText().substring(1));
         double shippingCost = Double.parseDouble(driver.findElement(shippingCostLocator).getText().substring(1));
         double grandTotal = Double.parseDouble(driver.findElement(grandTotalLocator).getText().substring(1));
-        System.out.println("subTotal: $" + subTotal);
-        System.out.println("shippingCost: $" + shippingCost);
-        System.out.println("grandTotal: $" +grandTotal);
+        System.out.println("Sub Total: $" + subTotal);
+        System.out.println("Shipping Cost: $" + shippingCost);
+        System.out.println("Grand Total: $" +grandTotal);
         AssertJUnit.assertEquals(grandTotal,subTotal+shippingCost);
     }
 }
