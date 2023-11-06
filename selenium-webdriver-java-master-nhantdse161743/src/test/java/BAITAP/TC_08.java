@@ -57,7 +57,7 @@ public class TC_08 {
             loginPage.clickLoginButton();
             Thread.sleep(2000);
             //4. Click on 'REORDER' link , change QTY & click Update
-            driver.findElement(By.xpath("(//a[@class='link-reorder'][normalize-space()='Reorder'])[1]")).click();
+            driver.findElement(By.xpath("(//a[@class='link-reorder'][normalize-space()='Reorder'])[3]")).click();
             Thread.sleep(2000);
             CartPage cartPage = new CartPage(driver);
             //5. Verify Grand Total is changed
@@ -69,7 +69,7 @@ public class TC_08 {
             Thread.sleep(2000);
             cartPage.clickFlatRateButton();
             cartPage.clickUpdateTotalButton();
-            double grandTotal = Double.parseDouble(driver.findElement(By.xpath("(//td[@class='a-right'])[2]")).getText().substring(1));
+            String grandTotal = driver.findElement(By.xpath("(//td[@class='a-right'])[2]")).getText();
             driver.findElement(By.xpath("(//input[@title='Qty'])[1]")).clear();
             driver.findElement(By.xpath("(//input[@title='Qty'])[1]")).sendKeys("10");
             Thread.sleep(2000);
