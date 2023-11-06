@@ -76,4 +76,9 @@ public class CartPage {
         System.out.println("Grand Total: $" +grandTotal);
         AssertJUnit.assertEquals(grandTotal,subTotal+shippingCost);
     }
+    public void verifyGrandTotal(double preGrandTotal) {
+        String grandTotal = driver.findElement(grandTotalLocator).getText().substring(1,6);
+        System.out.println("Grand Total: $" +preGrandTotal);
+        System.out.println("Grand Total after update: $" +grandTotal);
+    }
 }
