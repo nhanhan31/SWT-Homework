@@ -55,7 +55,7 @@ public class TC_07 {
             for (String handle : driver.getWindowHandles()) {
                 driver.switchTo().window(handle);
             }
-            Thread.sleep(2000);
+            Thread.sleep(200);
             scc = (scc+1);
             TakesScreenshot screenshot =((TakesScreenshot)driver);
             File srcFile= screenshot.getScreenshotAs(OutputType.FILE);

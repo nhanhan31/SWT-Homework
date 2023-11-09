@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 
 public class CartPage {
@@ -21,6 +22,8 @@ public class CartPage {
     By subtotalLocator = By.xpath("(//td)[13]");
     By shippingCostLocator = By.xpath("(//td[@class='a-right'])[6]");
     By grandTotalLocator = By.xpath("(//td[@class='a-right'])[2]");
+    By couponInputLocator = By.xpath("(//input[@id='coupon_code'])[1]");
+    By applyCouponButton = By.xpath("(//span[contains(text(),'Apply')])[1]");
     public CartPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -80,10 +83,16 @@ public class CartPage {
         String afterGrandTotal = driver.findElement(grandTotalLocator).getText();
         System.out.println("Grand Total: " +preGrandTotal);
         System.out.println("Grand Total after update: " +afterGrandTotal);
-        try {
-            AssertJUnit.assertNotSame(preGrandTotal, afterGrandTotal);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Assert.assertNotEquals(preGrandTotal, afterGrandTotal);
     }
+    public void enterCoupon(String coupon){
+        WebElement couponElement = driver.findElement(couponInputLocator);
+        couponElement.clear();
+        couponElement.sendKeys(coupon);
+    }
+    public void clickApplyCouponButton (){
+        driver.findElement(applyCouponButton).click();
+    }
+
+
 }
