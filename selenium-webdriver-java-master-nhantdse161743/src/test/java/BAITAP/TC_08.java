@@ -57,7 +57,7 @@ public class TC_08 {
             loginPage.clickLoginButton();
             Thread.sleep(2000);
             //4. Click on 'REORDER' link , change QTY & click Update
-            driver.findElement(By.xpath("(//a[@class='link-reorder'][normalize-space()='Reorder'])[3]")).click();
+            driver.findElement(By.xpath("(//a[@class='link-reorder'][normalize-space()='Reorder'])[1]")).click();
             Thread.sleep(2000);
             CartPage cartPage = new CartPage(driver);
             //5. Verify Grand Total is changed
