@@ -103,6 +103,7 @@ public class TC_08 {
                 System.out.println("No dropdown element present");
             }
             Thread.sleep(2000);
+            checkOutPage.clickUseBillingAddressButton();
             checkOutPage.clickContinueShipInfoButton();
             Thread.sleep(4000);
             checkOutPage.clickContinueShipButton();

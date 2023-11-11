@@ -133,6 +133,7 @@ public class TC_06 {
                 System.out.println("No dropdown element present");
             }
             Thread.sleep(2000);
+            checkOutPage.clickUseBillingAddressButton();
             checkOutPage.clickContinueShipInfoButton();
             Thread.sleep(4000);
             //13. In Shipping Method, Click Continue

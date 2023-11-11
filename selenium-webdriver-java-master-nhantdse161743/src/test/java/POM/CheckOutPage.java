@@ -22,6 +22,7 @@ public class CheckOutPage {
     By moneyOrderButton = By.xpath("(//input[@id='p_method_checkmo'])[1]");
     By continuePaymentButton = By.xpath("(//button[@onclick='payment.save()'])[1]");
     By placeOrderButton = By.xpath("(//button[@title='Place Order'])[1]");
+    By useBillingAddressButton = By.xpath("(//input[@id='shipping:same_as_billing'])[1]");
 
     public CheckOutPage(WebDriver driver) {
         this.driver = driver;
@@ -82,4 +83,5 @@ public class CheckOutPage {
     public void clickPlaceOrderButton(){
         driver.findElement(placeOrderButton).click();
     }
+    public void clickUseBillingAddressButton() { driver.findElement(useBillingAddressButton).click(); }
 }
